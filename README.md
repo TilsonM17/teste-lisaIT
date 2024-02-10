@@ -25,19 +25,19 @@ docker-compose --env-file .env up -d
 3 . Acesse o container da aplicação e instale as dependencias.
 
 ```bash
-docker-compose exec php_lisa_it composer install
+docker exec -it php_lisa_it composer install
 ```
 
 4 . Gerar a chave do projeto
 
 ```bash
-docker-compose exec php_lisa_it php artisan key:generate
+docker exec -it php_lisa_it php artisan key:generate
 ```
 
 5 . Rode o comando para criar as tabelas no banco de dados
 
 ```bash
-docker-compose exec php_lisa_it  php artisan migrate --seed
+docker exec -it php_lisa_it  php artisan migrate --seed
 ```
 
 ---
@@ -55,5 +55,5 @@ Isso vai criar um usuario de teste que pode usar para se autenticar:
 ## Testes
 
 ```bash
-docker-compose exec php_lisa_it php artisan test
+docker exec -it php_lisa_it php artisan test
 ```
