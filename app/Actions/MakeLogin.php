@@ -12,7 +12,6 @@ class MakeLogin
 {
     use AsAction, WithAttributes;
 
-
     public function rules()
     {
         return [
@@ -28,12 +27,13 @@ class MakeLogin
 
         $user = User::where('email', $validatedData['email'])->first();
 
-        if (!$user || !Hash::check($validatedData['password'], $user->password)) {
+        if (! $user || ! Hash::check($validatedData['password'], $user->password)) {
             return response()->json([
-                'message' => 'Invalid Credentials'
+                'message' => 'Invalid Credentials',
             ], 401);
         }
-        $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
+        $token = $user->createToken($user->name.'-AuthToken')->plainTextToken;
+
         return response()->json([
             'access_token' => $token,
         ]);
