@@ -6,7 +6,7 @@ services:
       context: ./docker
       dockerfile: Dockerfile
     working_dir: /var/www/
-    container_name: php
+    container_name: php_lisa_it
     ports:
       - 9000:9000
     volumes:
@@ -16,7 +16,7 @@ services:
   #Nginx Service
   webserver:
     image: nginx:alpine
-    container_name: nginx
+    container_name: nginx_lisa_it
     ports:
       - 8080:80
     volumes:
@@ -28,7 +28,7 @@ services:
     ports:
       - '3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-abc123}
+      MYSQL_DATABASE: ${DB_DATABASE:-todo}
     volumes:
       - './.docker/mysql:/var/lib/mysql'

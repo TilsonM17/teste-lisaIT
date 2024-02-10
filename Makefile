@@ -1,5 +1,5 @@
 
-CONTAINER_NAME = php
+CONTAINER_NAME = php_lisa_it
 
 up:
 	docker-compose --env-file .env up -d
