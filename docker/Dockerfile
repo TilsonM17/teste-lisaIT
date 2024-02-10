@@ -1,7 +1,7 @@
 FROM php:8.2-fpm
 
 ENV USERID=1000
-ENV USERNAME=canabi
+ENV USERNAME=tilson
 
 # Set working directory
 WORKDIR /var/www/
@@ -43,22 +43,13 @@ RUN apt update && apt install -y \
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache mbstring exif pcntl bcmath gd dom xml
 RUN docker-php-ext-enable mysqli
 
-#Install Redis
-
-RUN pecl install redis
-RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 # Timezone
-
 RUN echo "date.timezone=America/Sao_Paulo" > /usr/local/etc/php/conf.d/timezone.ini
 RUN echo "memory_limit = 1024M" > /usr/local/etc/php/conf.d/memory_limit.ini
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-#Install npm
-RUN apt-get install -y nodejs npm
-
-RUN echo "$USERID";
 # Add user for laravel application
 RUN groupadd -g $USERID $USERNAME
 RUN useradd -u $USERID -ms /bin/bash -g $USERNAME $USERNAME
